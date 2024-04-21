@@ -10,16 +10,23 @@ public class PlayerController : MonoBehaviour
     public Transform bulletSpawnPoint;
     public GameObject bulletPrefab;
     public float bulletSpeed;
+    public float fireRate;
+    public float attackTimer;
 
-
+    private Vector3 testPos;
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        fireRate = 1;
+        attackTimer = 1 / fireRate;
     }
     // Update is called once per frame
     void Update()
     {
+        testPos = Input.mousePosition;
+        Debug.Log(testPos);
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(mousePos);
 
         Vector3 rotation = mousePos - transform.position;
 
@@ -27,10 +34,11 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
-        if(Input.GetKeyUp(KeyCode.Space))
+        if((attackTimer -= Time.deltaTime) <= 0)
         {
             Shoot();
-        }
+            attackTimer = 1 / fireRate;
+        }        
     }
 
     void Shoot()
