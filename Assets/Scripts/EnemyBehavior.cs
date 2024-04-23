@@ -7,6 +7,7 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject target;
     public float moveSpeed;
 
+    [SerializeField]
     private int health;
     // Start is called before the first frame update
     void OnEnable()
@@ -23,5 +24,9 @@ public class EnemyBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         health--;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
