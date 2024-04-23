@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         testPos = Input.mousePosition;
-        Debug.Log(testPos);
+        
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(mousePos);
+        
 
         Vector3 rotation = mousePos - transform.position;
 
