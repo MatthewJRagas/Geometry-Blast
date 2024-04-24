@@ -9,10 +9,12 @@ public class EnemyBehavior : MonoBehaviour
 
     [SerializeField]
     private int health;
+    private int xpAmount;
     // Start is called before the first frame update
     void OnEnable()
     {
         health = 5;
+        xpAmount = 5;
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class EnemyBehavior : MonoBehaviour
         health--;
         if (health <= 0)
         {
+            EventManager.instance.AddExperience(xpAmount);
             Destroy(gameObject);
         }
     }

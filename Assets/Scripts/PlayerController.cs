@@ -12,18 +12,18 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed;
     public float fireRate;
     public float attackTimer;
-
-    private Vector3 testPos;
+    [SerializeField] int currentExperience, levelMaxExperience, experiencePerLevelAmount, currentLevel;
+    
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        EventManager.instance.OnExperienceChange += HandleExperienceChange;
         fireRate = 1;
         attackTimer = 1 / fireRate;
     }
     // Update is called once per frame
     void Update()
-    {
-        testPos = Input.mousePosition;
+    {        
         
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         
@@ -47,5 +47,30 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = mousePos - transform.position;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y).normalized * bulletSpeed;
         
+    }
+
+    void HandleExperienceChange(int newExperience)
+    {
+        currentExperience += newExperience;
+
+        if(currentExperience >= levelMaxExperience)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        currentLevel++;
+        if(fireRate < 2)
+        {
+            fireRate++;
+        }
+        else if(fireRate >= 2) 
+        {
+            fireRate += 0.5f;
+        }
+        currentExperience -= levelMaxExperience;
+        levelMaxExperience = experiencePerLevelAmount * currentLevel;
     }
 }
