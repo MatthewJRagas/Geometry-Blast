@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed;
     public float fireRate;
     public float attackTimer;
-    [SerializeField] int currentExperience, levelMaxExperience, experiencePerLevelAmount, currentLevel;
+    [SerializeField] int currentExperience, levelMaxExperience, experiencePerLevelAmount, currentLevel;    
     
     private void Start()
     {
@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
         EventManager.instance.OnExperienceChange += HandleExperienceChange;
         fireRate = 1;
         attackTimer = 1 / fireRate;
+        experiencePerLevelAmount = 5;
+        levelMaxExperience = experiencePerLevelAmount;
+        currentLevel = 1;        
     }
     // Update is called once per frame
     void Update()
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
             attackTimer = 1 / fireRate;
-        }        
+        }
     }
 
     void Shoot()

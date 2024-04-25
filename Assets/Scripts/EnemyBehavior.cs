@@ -14,7 +14,7 @@ public class EnemyBehavior : MonoBehaviour
     void OnEnable()
     {
         health = 5;
-        xpAmount = 5;
+        xpAmount = 1;
     }
 
     // Update is called once per frame
@@ -28,6 +28,7 @@ public class EnemyBehavior : MonoBehaviour
         health--;
         if (health <= 0)
         {
+            ScoreTracker.scoreValue++;
             EventManager.instance.AddExperience(xpAmount);
             Destroy(gameObject);
         }
