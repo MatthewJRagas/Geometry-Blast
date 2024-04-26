@@ -10,11 +10,31 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField]
     private int health;
     private int xpAmount;
+    private int rndNum;
     // Start is called before the first frame update
     void OnEnable()
     {
         health = 5;
         xpAmount = 1;
+
+        rndNum = UnityEngine.Random.Range(1, 100);
+
+        if(rndNum <= 25)
+        {
+            transform.rotation = new Quaternion(0,0,0,0);
+        }
+        else if(rndNum > 25 && rndNum <= 50)
+        {
+            transform.rotation = new Quaternion(0, 0, 90, 0);
+        }
+        else if(rndNum > 50 && rndNum <= 75)
+        {
+            transform.rotation = new Quaternion(0, 0, 180, 0);
+        }
+        else if(rndNum > 75 && rndNum <= 100)
+        {
+            transform.rotation = new Quaternion(0, 0, -90, 0);
+        }
     }
 
     // Update is called once per frame
