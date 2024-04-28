@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     public GameObject target;
-    public float moveSpeed;
+    public float moveSpeed;    
 
     [SerializeField]
     private int health;
@@ -14,24 +14,24 @@ public class EnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        health = 5;
+        health = UnityEngine.Random.Range(EventManager.enemyMinHealth, EventManager.enemyMaxHealth);
         xpAmount = 1;
 
         rndNum = UnityEngine.Random.Range(1, 100);
 
-        if(rndNum <= 25)
+        if (rndNum <= 25)
         {
-            transform.rotation = new Quaternion(0,0,0,0);
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         }
-        else if(rndNum > 25 && rndNum <= 50)
+        else if (rndNum > 25 && rndNum <= 50)
         {
             transform.rotation = new Quaternion(0, 0, 90, 0);
         }
-        else if(rndNum > 50 && rndNum <= 75)
+        else if (rndNum > 50 && rndNum <= 75)
         {
             transform.rotation = new Quaternion(0, 0, 180, 0);
         }
-        else if(rndNum > 75 && rndNum <= 100)
+        else if (rndNum > 75 && rndNum <= 100)
         {
             transform.rotation = new Quaternion(0, 0, -90, 0);
         }
@@ -40,7 +40,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);                
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

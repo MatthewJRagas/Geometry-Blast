@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySpawnBehavior : MonoBehaviour
 {
     public float spawnTimer;
-    public int enemyCode;
+    public int enemyCode;    
 
     public Transform enemySpawnPoint;
     public GameObject enemyPrefab;
