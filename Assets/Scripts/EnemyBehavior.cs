@@ -8,13 +8,15 @@ using UnityEngine.UI;
 public class EnemyBehavior : MonoBehaviour
 {
     public GameObject target;
-    public float moveSpeed; 
+    public float moveSpeed;
 
-    [SerializeField]
-    private int health;
-    private int xpAmount;
-    private int rndNum;
+    public Camera camera;
+    public Transform textTransform;
+
+    [SerializeField] int health, xpAmount, rndNum;
+    
     TextMeshProUGUI lives;
+    
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -47,6 +49,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
         lives.text = health.ToString();
+
+        textTransform.rotation = camera.transform.rotation;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
