@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehavior : MonoBehaviour
 {
     public GameObject target;
-    public float moveSpeed;    
+    public float moveSpeed; 
 
     [SerializeField]
     private int health;
     private int xpAmount;
     private int rndNum;
+    TextMeshProUGUI lives;
     // Start is called before the first frame update
     void OnEnable()
     {
         health = UnityEngine.Random.Range(EventManager.enemyMinHealth, EventManager.enemyMaxHealth);
+        lives = GetComponentInChildren<TextMeshProUGUI>();
         xpAmount = 1;
 
         rndNum = UnityEngine.Random.Range(1, 100);
@@ -40,7 +45,8 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);                
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        lives.text = health.ToString();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
