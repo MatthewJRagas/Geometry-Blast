@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         EventManager.instance.OnExperienceChange += HandleExperienceChange;
         fireRate = 1;
         attackTimer = 1 / fireRate;
-        experiencePerLevelAmount = 5;
+        experiencePerLevelAmount = 1;
         levelMaxExperience = experiencePerLevelAmount;
         currentLevel = 1;        
     }
@@ -74,6 +74,6 @@ public class PlayerController : MonoBehaviour
             fireRate += 0.5f;
         }
         currentExperience -= levelMaxExperience;
-        levelMaxExperience = experiencePerLevelAmount * currentLevel;
+        levelMaxExperience += experiencePerLevelAmount * currentLevel;
     }
 }
